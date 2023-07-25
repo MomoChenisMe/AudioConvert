@@ -8,6 +8,19 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+//封包壓縮的服務
+builder.Services.AddResponseCompression();
+//CORS
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(builder =>
+    {
+        builder.AllowAnyOrigin()
+            .AllowAnyMethod()
+            .AllowAnyHeader();
+    });
+});
+builder.Services.AddControllers();
 
 var app = builder.Build();
 
@@ -19,7 +32,10 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
+//設定 HTTP 回應壓縮
+app.UseResponseCompression();
+//CORS
+app.UseCors();
 app.UseAuthorization();
 
 app.MapControllers();

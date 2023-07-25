@@ -10,9 +10,9 @@ namespace AudioConvert.Controllers
     public class AudioConvertController : ControllerBase
     {
         [HttpPost("acc2m4a")]
-        public async Task<IActionResult> Post([FromBody] AudioConvertModel base64Audio)
+        public async Task<ActionResult<AudioConvertOutPutModel>> Post([FromBody] AudioConvertModel base64AudioObject)
         {
-            var audioBytes = Convert.FromBase64String(base64Audio.base64Data);
+            var audioBytes = Convert.FromBase64String(base64AudioObject.accBase64Data);
 
             var aacFilePath = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString() + ".aac");
             await System.IO.File.WriteAllBytesAsync(aacFilePath, audioBytes);
@@ -29,7 +29,11 @@ namespace AudioConvert.Controllers
             System.IO.File.Delete(aacFilePath);
             System.IO.File.Delete(m4aFilePath);
 
-            return Ok(m4aFileBase64);
+            AudioConvertOutPutModel response = new AudioConvertOutPutModel()
+            {
+                m4aBase64Data = m4aFileBase64
+            };
+            return Ok(response);
         }
     }
 }

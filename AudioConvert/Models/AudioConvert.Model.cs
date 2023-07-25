@@ -2,6 +2,11 @@
 {
     public class AudioConvertModel
     {
-        public string base64Data { get; set; }
+        public string accBase64Data { get; set; }
+    }
+
+    public class AudioConvertOutPutModel
+    {
+        public string m4aBase64Data { get; set; }
     }
 }
