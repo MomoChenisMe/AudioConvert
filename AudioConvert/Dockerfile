@@ -5,7 +5,7 @@ WORKDIR /app
 EXPOSE 80
 EXPOSE 443
 
-# Install ffmpeg
+#安裝FFmpeg
 RUN apt-get update \
     && apt-get install -y ffmpeg
 
