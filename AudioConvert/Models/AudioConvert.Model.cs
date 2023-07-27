@@ -2,7 +2,7 @@
 {
 public class AudioConvertModel
 {
-    public string accBase64Data { get; set; }
+    public string aacBase64Data { get; set; }
 }
 
 public class AudioConvertOutPutModel

@@ -9,11 +9,11 @@ namespace AudioConvert.Controllers
 [ApiController]
 public class AudioConvertController : ControllerBase
 {
-    [HttpPost("acc2m4a")]
+    [HttpPost("aac2m4a")]
     public async Task<ActionResult<AudioConvertOutPutModel>> Post([FromBody] AudioConvertModel base64AudioObject)
     {
         //Base64字串轉換成byte陣列
-        var audioBytes = Convert.FromBase64String(base64AudioObject.accBase64Data);
+        var audioBytes = Convert.FromBase64String(base64AudioObject.aacBase64Data);
         //建立一個aac暫存檔案路徑，用於保存轉換後的資料
         var aacFilePath = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString() + ".aac");
         //建立一個m4a暫存檔案路徑，用於保存轉換後的資料
